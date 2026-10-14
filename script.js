@@ -101,24 +101,41 @@ const PEOPLE_DATA = [
   }
 ];
 
-// عداد زوار محلي يعتمد على الذاكرة المحلية (localStorage)
+// ==========================================
+//  عداد الزوار المضمون (يعمل فوراً على الموقع)
+// ==========================================
 function handleLocalCounter(counterKey, elementId) {
   const counterElement = document.getElementById(elementId);
   if (!counterElement) return;
 
-  // جلب الرقم الحالي أو البدء من رقم أساسي (مثلاً 150)
+  // جلب عدد الزيارات السابق من المتصفح أو البدء من رقم تجريبي
   let visits = localStorage.getItem(counterKey);
-  
+
   if (!visits) {
-    visits = 150; // الرقم الابتدائي للزوار لو دي أول مرة
+    visits = 125; // يمكنك تعديل هذا الرقم ليبدأ منه العداد لأول مرة
   } else {
-    visits = parseInt(visits) + 1; // زيادة رقم مع كل زيارة جديدة للصفحة
+    visits = parseInt(visits) + 1; // زيادة زائر جديد مع كل فتح للموقع
   }
 
   localStorage.setItem(counterKey, visits);
+  
+  // عرض الرقم بالأرقام العربية
   counterElement.textContent = visits.toLocaleString("ar-EG");
 }
 
+// تشغيل العداد فور تحميل الصفحة
+document.addEventListener("DOMContentLoaded", () => {
+  renderCards();
+  setupModalEvents();
+
+  // تشغيل العداد للصفحة الرئيسية وصفحة التواصل
+  if (document.getElementById("home-counter")) {
+    handleLocalCounter("home_visits_count", "home-counter");
+  }
+  if (document.getElementById("contact-counter")) {
+    handleLocalCounter("contact_visits_count", "contact-counter");
+  }
+});
 // استبدل استدعاء العداد القديم بهذا في حدث التحميل
 document.addEventListener("DOMContentLoaded", () => {
   renderCards();
