@@ -793,3 +793,10 @@ body {
   .poem-verse { flex-direction: column; gap: 5px; text-align: center; }
   .modal-card { padding: 25px 20px; }
 }
+/* تنسيق تقسيم النصوص داخل النافذة المنبثقة إلى فقرات مرتبة */
+.modal-body p {
+  white-space: pre-line;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  text-align: justify;
+}
