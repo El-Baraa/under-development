@@ -102,17 +102,17 @@ const PEOPLE_DATA = [
 ];
 
 // ==========================================
-//  عداد الزوار المضمون (يعمل فوراً على الموقع)
+//  عداد الزوار يبدأ من 1 ويزيد تصاعدياً
 // ==========================================
 function handleLocalCounter(counterKey, elementId) {
   const counterElement = document.getElementById(elementId);
   if (!counterElement) return;
 
-  // جلب عدد الزيارات السابق من المتصفح أو البدء من رقم تجريبي
+  // جلب عدد الزيارات السابق من المتصفح
   let visits = localStorage.getItem(counterKey);
 
   if (!visits) {
-    visits = 1; // يمكنك تعديل هذا الرقم ليبدأ منه العداد لأول مرة
+    visits = 1; // يبدأ من 1 لأول زيارة
   } else {
     visits = parseInt(visits) + 1; // زيادة زائر جديد مع كل فتح للموقع
   }
@@ -128,7 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCards();
   setupModalEvents();
 
-  // تشغيل العداد للصفحة الرئيسية وصفحة التواصل
   if (document.getElementById("home-counter")) {
     handleLocalCounter("home_visits_count", "home-counter");
   }
@@ -136,15 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
     handleLocalCounter("contact_visits_count", "contact-counter");
   }
 });
-// استبدل استدعاء العداد القديم بهذا في حدث التحميل
-document.addEventListener("DOMContentLoaded", () => {
-  renderCards();
-  setupModalEvents();
-
-  handleLocalCounter("home_page_visits", "home-counter");
-  handleLocalCounter("contact_page_visits", "contact-counter");
-});
-
 // توليد الكروت ديناميكياً
 function renderCards() {
   const friendsGrid = document.getElementById("friends-grid");
