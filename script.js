@@ -101,10 +101,32 @@ const PEOPLE_DATA = [
   }
 ];
 
-// مفاتيح عداد الزوار
-const COUNTER_NAMESPACE = "https://el-baraa.github.io/under-development/";
-const HOME_COUNTER_KEY = "home_page_visits";
-const CONTACT_COUNTER_KEY = "contact_page_visits";
+// عداد زوار محلي يعتمد على الذاكرة المحلية (localStorage)
+function handleLocalCounter(counterKey, elementId) {
+  const counterElement = document.getElementById(elementId);
+  if (!counterElement) return;
+
+  // جلب الرقم الحالي أو البدء من رقم أساسي (مثلاً 150)
+  let visits = localStorage.getItem(counterKey);
+  
+  if (!visits) {
+    visits = 150; // الرقم الابتدائي للزوار لو دي أول مرة
+  } else {
+    visits = parseInt(visits) + 1; // زيادة رقم مع كل زيارة جديدة للصفحة
+  }
+
+  localStorage.setItem(counterKey, visits);
+  counterElement.textContent = visits.toLocaleString("ar-EG");
+}
+
+// استبدل استدعاء العداد القديم بهذا في حدث التحميل
+document.addEventListener("DOMContentLoaded", () => {
+  renderCards();
+  setupModalEvents();
+
+  handleLocalCounter("home_page_visits", "home-counter");
+  handleLocalCounter("contact_page_visits", "contact-counter");
+});
 
 // توليد الكروت ديناميكياً
 function renderCards() {
