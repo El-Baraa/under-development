@@ -102,7 +102,7 @@ const PEOPLE_DATA = [
 ];
 
 // مفاتيح عداد الزوار
-const COUNTER_NAMESPACE = "quran_sard_albaraa_2026";
+const COUNTER_NAMESPACE = "https://el-baraa.github.io/under-development/";
 const HOME_COUNTER_KEY = "home_page_visits";
 const CONTACT_COUNTER_KEY = "contact_page_visits";
 
