@@ -102,17 +102,17 @@ const PEOPLE_DATA = [
 ];
 
 // ==========================================
-//  عداد الزوار يبدأ من 1 ويزيد تصاعدياً
+//  عداد الزوار المحلي يبدأ من 1 ويزيد تصاعدياً
 // ==========================================
 function handleLocalCounter(counterKey, elementId) {
   const counterElement = document.getElementById(elementId);
   if (!counterElement) return;
 
-  // جلب عدد الزيارات السابق من المتصفح
+  // جلب عدد الزيارات السابق من الذاكرة المحلية
   let visits = localStorage.getItem(counterKey);
 
   if (!visits) {
-    visits = 1; // يبدأ من 1 لأول زيارة
+    visits = 1; // يبدأ من 1 في أول زيارة
   } else {
     visits = parseInt(visits) + 1; // زيادة زائر جديد مع كل فتح للموقع
   }
@@ -125,8 +125,9 @@ function handleLocalCounter(counterKey, elementId) {
 
 // تشغيل العداد فور تحميل الصفحة
 document.addEventListener("DOMContentLoaded", () => {
-  renderCards();
-  setupModalEvents();
+  // إذا كانت الدوال الأخرى موجودة
+  if (typeof renderCards === "function") renderCards();
+  if (typeof setupModalEvents === "function") setupModalEvents();
 
   if (document.getElementById("home-counter")) {
     handleLocalCounter("home_visits_count", "home-counter");
