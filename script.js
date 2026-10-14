@@ -112,7 +112,7 @@ function handleLocalCounter(counterKey, elementId) {
   let visits = localStorage.getItem(counterKey);
 
   if (!visits) {
-    visits = 125; // يمكنك تعديل هذا الرقم ليبدأ منه العداد لأول مرة
+    visits = 1; // يمكنك تعديل هذا الرقم ليبدأ منه العداد لأول مرة
   } else {
     visits = parseInt(visits) + 1; // زيادة زائر جديد مع كل فتح للموقع
   }
